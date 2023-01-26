@@ -1,0 +1,11 @@
+MD5_LONG gethexword32(const char * str) {
+    // get first 8 characters of str
+    char hex[9];
+    strncpy(hex, str, 8);
+    hex[8] = '\0';
+    // convert to long
+    MD5_LONG num = strtol(hex, NULL, 16);
+    // reverse bytes of num (little endian order)
+    num = ((num & 0x000000FF) << 24) | ((num & 0x0000FF00) << 8) | ((num & 0x00FF0000) >> 8) | ((num & 0xFF000000) >> 24);
+    return num;
+}
